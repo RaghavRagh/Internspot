@@ -1,7 +1,7 @@
 const Card = ({jobTitle, companyName, location, stipend, duration}) => {
   return (
     <div className="cardWrapper m-4 min-w-80">
-      <div className="cardContainer p-4 border-2 border-slate-200 rounded-2xl bg-white">
+      <div className="cardContainer p-5 border-2 border-slate-200 rounded-2xl bg-white shadow-sm">
         <div className="topInfo flex flex-col justify-start gap-1">
           <span className="icon flex items-center gap-3 text-sm">
             <span>

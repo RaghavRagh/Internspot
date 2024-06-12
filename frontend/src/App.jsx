@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import { Suspense } from "react";
 import { AuthProvider } from "./Context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Membership from "./pages/Subscription/Subscription";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="membership" element={<Membership />} />
             </Route>
           </Routes>
         </Suspense>

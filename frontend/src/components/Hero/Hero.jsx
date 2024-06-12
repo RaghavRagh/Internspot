@@ -1,7 +1,7 @@
 const Hero = () => {
   return (
     <section className="heroWrapper mt-8">
-      <div className="heroContainer md:container md:mx-auto p-4 flex items-center justify-around">
+      <div className="heroContainer md:container md:mx-auto p-4 md:flex items-center justify-around">
         {/* left-side */}
         <div className="heroLeft flex flex-col items-start">
           <div className="heroTitle text-6xl text-slate-900 font-bold leading-tight">
@@ -11,7 +11,7 @@ const Hero = () => {
             </h1>
           </div>
           <div className="heroDescription my-6">
-            <p className="flex flex-col text-slate-500 font-medium">
+            <p className="flex flex-col text-slate-400 font-medium text-lg tracking-tight">
               <span>Empowering tomorrow's leaders today through immersive</span>
               <span>internships - join us and pave your path to success!</span>
             </p>

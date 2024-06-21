@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -23,9 +24,10 @@ db.once("open", () => {
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use(paymentRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
+app.get("/getKey", (req, res) => {
+  res.status(200).json({ key: process.env.RAZORPAY_API_KEY });
 });
 
 app.listen(PORT, () => {

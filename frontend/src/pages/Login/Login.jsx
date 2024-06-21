@@ -1,20 +1,38 @@
-import { useContext, useState } from "react";
+/* eslint-disable react/no-unescaped-entities */
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../firebase/firebase";
-import AuthContext from "../../Context/AuthContext";
+import { ClipLoader } from "react-spinners";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginFail,
+  loginRequest,
+  loginSuccess,
+  selectUserInfo,
+  selectUserLoading,
+} from "../../features/userSlice";
 
 const Login = () => {
-  const { setUser } = useContext(AuthContext);
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const userInfo = useSelector(selectUserInfo);
+  const loading = useSelector(selectUserLoading);
+
   const [userRegistration, setUserRegistration] = useState({
     email: "",
     password: "",
   });
 
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
+
+  // Google sign-in funcition
   const registerFunction = () => {
     signInWithPopup(auth, provider)
       .then((res) => {
@@ -26,13 +44,17 @@ const Login = () => {
       });
   };
 
+  // function to put values in fields
   const handleInput = (e) => {
     const { name, value } = e.target;
     setUserRegistration({ ...userRegistration, [name]: value });
   };
 
+  // function for form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(loginRequest());
+
     try {
       const response = await axios.post(
         "http://localhost:8000/auth/login",
@@ -42,11 +64,13 @@ const Login = () => {
       const { token, user } = response.data;
 
       if (token) {
-        setUser(user);
         localStorage.setItem("token", token);
+        localStorage.setItem("userInfo", JSON.stringify(user));
+        dispatch(loginSuccess(user));
         navigate("/");
       }
     } catch (error) {
+      dispatch(loginFail(error.message));
       console.error(error);
     }
   };
@@ -105,8 +129,12 @@ const Login = () => {
                 onChange={handleInput}
               />
             </div>
-            <button className="bg-sky-400 hover:bg-sky-300 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center mt-4">
-              Login
+            <button className="bg-sky-400 hover:bg-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-200 focus:ring-offset-2 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center gap-2 mt-4">
+              {loading ? (
+                <ClipLoader color="white" size={20} />
+              ) : (
+                <span>Login</span>
+              )}
             </button>
           </form>
           <p className="text-center text-sm mt-3">

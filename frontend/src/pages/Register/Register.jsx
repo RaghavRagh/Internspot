@@ -3,9 +3,13 @@ import axios from "axios";
 import { signInWithPopup } from "firebase/auth";
 import "./Register.css";
 import { auth, provider } from "../../firebase/firebase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [userExist, setUserExist] = useState(false);
   const [userRegistration, setUserRegistration] = useState({
     name: "",
     email: "",
@@ -30,13 +34,30 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setUserExist(false);
+    setLoading(true);
+
     try {
       const response = await axios.post(
         "http://localhost:8000/auth/register",
         userRegistration
       );
+
+      setLoading(false);
+      if (response.data.message === "User already exists") {
+        setUserExist(true);
+      }
+
+      const { token, user } = response.data;
+      if (token && user) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("userInfo", JSON.stringify(user));
+        navigate("/");
+      }
+
       console.log(response.data);
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
@@ -64,7 +85,7 @@ const Register = () => {
           Sign in with Google
         </button>
         <div className="w-full my-8 border-b-2"></div>
-        {/* login form */}
+        {/* register form */}
         <div className="registerFormInfo  w-full">
           <form
             action="POST"
@@ -72,6 +93,12 @@ const Register = () => {
             onSubmit={handleSubmit}
           >
             <div className="registerInfo flex flex-col mb-4">
+              {userExist && (
+                <div className="text-sm text-red-600">
+                  {" "}
+                  User already exists!
+                </div>
+              )}
               <label htmlFor="" className="font-medium">
                 Name
               </label>
@@ -119,8 +146,15 @@ const Register = () => {
                 onChange={handleInput}
               />
             </div>
-            <button className="bg-sky-400 hover:bg-sky-300 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center mt-2">
-              Login
+            <button
+              type="submit"
+              className="bg-sky-400 hover:bg-sky-300 focus:outline-none focus:ring-2 focus:ring-sky-200 focus:ring-offset-1 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center mt-2"
+            >
+              {loading ? (
+                <ClipLoader color="white" size={20} />
+              ) : (
+                <span>Register</span>
+              )}
             </button>
           </form>
           <p className="text-center text-sm mt-3">

@@ -3,9 +3,9 @@ import Card from "../Card/Card";
 const Internships = () => {
   return (
     <>
-      <section className="internshipWrapper bg-sky-100/30 border rounded-[2rem] mx-4 mb-10 shadow-sm md:mx-12">
+      <section className="internshipWrapper bg-sky-100/30 border rounded-[2rem] mx-3 mb-10 shadow-sm md:mx-12">
         <div className="internshipContainer md:container md:mx-auto flex flex-col justiy-center items-center p-10 px-0">
-          <h1 className="text-3xl font-extrabold mb-5 mx-5">
+          <h1 className="text-3xl text-center font-extrabold mb-5 mx-5">
             Trending on Internspot
           </h1>
           <div className="TrendInternCards flex items-center justify-center flex-wrap">

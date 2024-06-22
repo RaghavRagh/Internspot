@@ -8,7 +8,7 @@ import { Suspense, useEffect } from "react";
 import Membership from "./pages/Subscription/Subscription";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "./features/userSlice";
-import CheckoutPage from "./pages/CheckoutPage";
+import CheckoutPage from "./pages/Checkout/CheckoutPage";
 
 function App() {
   const dispatch = useDispatch();

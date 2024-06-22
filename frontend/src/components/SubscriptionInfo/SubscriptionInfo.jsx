@@ -1,6 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SubscriptionInfo = ({
   planName,
@@ -10,139 +8,16 @@ const SubscriptionInfo = ({
   gradientColors,
 }) => {
   const navigate = useNavigate();
-  const [discount, setDiscount] = useState(0);
-  const [coupon, setCoupon] = useState("");
-  const [finalPrice, setFinalPrice] = useState(price);
 
-  useEffect(() => {
-    const randomCoupon = Math.random().toString(36).substring(7).toUpperCase();
-    setCoupon(randomCoupon);
-  }, []);
-
-  // checkout handler
-  const checkoutHandler = async (amount) => {
+  const handleGetStartedClick = () => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/auth/login");
       return;
     }
-
-    // const currentTime = new Date();
-    // const currentHourIST = currentTime.getUTCHours() + 5.5;
-
-    // if (currentHourIST < 10 || currentHourIST > 11) {
-    //   alert("Payments are only allowed between 10 AM and 11 AM IST.");
-    //   return;
-    // }
-
-    const {
-      data: { key },
-    } = await axios.get("http://localhost:8000/getKey");
-
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/payment",
-        { amount },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const order = response.data.order;
-
-      const options = {
-        key,
-        amount: order.amount,
-        currency: "INR",
-        name: "Raghav",
-        description: "Test Transaction",
-        image: "https://example.com/your_logo",
-        order_id: order.id,
-        // callback_url: "http://localhost:8000/paymentverification",
-        handler: async function (response) {
-          const data = {
-            razorpay_order_id: response.razorpay_order_id,
-            razorpay_payment_id: response.razorpay_payment_id,
-            razorpay_signature: response.razorpay_signature,
-            // planName: planName,
-            // price: price,
-            // email: "radwimps187@gmail.com", // User's email
-          };
-
-          try {
-            const verificationResponse = await axios.post(
-              "http://localhost:8000/paymentverification",
-              data,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-
-            if (verificationResponse.data.status === "success") {
-              alert("Payment successful and verified!");
-              console.log(verificationResponse.data);
-            } else {
-              alert("Payment verification failed.");
-            }
-          } catch (error) {
-            console.error("Verification error:", error);
-          }
-        },
-        prefill: {
-          name: "Gaurav Kumar",
-          email: "gaurav.kumar@example.com",
-          contact: "9000090000",
-        },
-        notes: {
-          address: "Razorpay Corporate Office",
-        },
-        theme: {
-          color: "#38bdf8",
-        },
-      };
-
-      const razor = new window.Razorpay(options);
-      razor.on("payment.failed", function (response) {
-        alert(response.error.code);
-        alert(response.error.description);
-        alert(response.error.source);
-        alert(response.error.step);
-        alert(response.error.reason);
-        alert(response.error.metadata.order_id);
-        alert(response.error.metadata.payment_id);
-      });
-
-      razor.open();
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleDiscountChange = (event) => {
-    const discountValue = parseInt(event.target.value);
-    setDiscount(discountValue);
-    const newPrice = price - (price * discountValue / 100);
-    setFinalPrice(newPrice);
-  };
-
-  const handleGetStartedClick = () => {
-    navigate('/checkout', {
-      state: {
-        planName,
-        price,
-        noOfInternship,
-        support,
-        gradientColors,
-        coupon,
-      }
-    });
+    navigate(
+      `/checkout?planName=${planName}&price=${price}&noOfInternship=${noOfInternship}&support=${support}&gradientColors=${gradientColors}`
+    );
   };
 
   return (
@@ -255,14 +130,7 @@ const SubscriptionInfo = ({
           </div>
         </li>
       </ul>
-      <div className="mb-4">
-        <label htmlFor="discount">Choose your discount (1% - 10%): </label>
-        <select id="discount" value={discount} onChange={handleDiscountChange}>
-          {[...Array(10).keys()].map(i => (
-            <option key={i + 1} value={i + 1}>{i + 1}%</option>
-          ))}
-        </select>
-      </div>
+
       <button
         className="focus:ring-2 focus:ring-blue-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center border border-slate-300 hover:bg-sky-100/40 transition ease-linear shadow"
         // onClick={() => checkoutHandler(finalPrice)}
@@ -270,7 +138,6 @@ const SubscriptionInfo = ({
       >
         Get started
       </button>
-      
     </div>
   );
 };

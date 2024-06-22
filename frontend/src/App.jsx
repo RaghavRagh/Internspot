@@ -36,7 +36,7 @@ function App() {
             <Route path="profile" element={<Profile />} />
             <Route path="subscription" element={<Membership />} />
           </Route>
-          <Route path="/payment" element={<CheckoutPage />}/>
+          <Route path="/checkout" element={<CheckoutPage />}/>
         </Routes>
       </Suspense>
     </BrowserRouter>

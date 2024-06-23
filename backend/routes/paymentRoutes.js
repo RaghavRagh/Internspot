@@ -4,7 +4,7 @@ import { authenticate } from '../middleware/authenticate.js';
 
 const router = express.Router();
 
-router.post('/payment', checkout);
-router.post('/paymentverification', paymentVerification);
+router.post('/payment', authenticate, checkout);
+router.post('/paymentverification', authenticate, paymentVerification);
 
 export default router;

@@ -11,6 +11,7 @@ import {
   loginFail,
   loginRequest,
   loginSuccess,
+  selectUserError,
   selectUserInfo,
   selectUserLoading,
 } from "../../features/userSlice";
@@ -20,6 +21,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo);
   const loading = useSelector(selectUserLoading);
+  const error = useSelector(selectUserError);
 
   const [userRegistration, setUserRegistration] = useState({
     email: "",
@@ -34,12 +36,22 @@ const Login = () => {
 
   // Google sign-in funcition
   const registerFunction = () => {
+    dispatch(loginRequest());
     signInWithPopup(auth, provider)
       .then((res) => {
-        console.log(res);
+        const user = {
+          name: res.user.displayName,
+          email: res.user.email,
+          phone: res.user.phone,
+          avatar: res.user.photoURL,
+        };
+        localStorage.setItem("token", res.user.accessToken);
+        localStorage.setItem("userInfo", JSON.stringify(user));
+        dispatch(loginSuccess(user));
         navigate("/");
       })
       .catch((err) => {
+        dispatch(loginFail(err.message));
         console.log(err);
       });
   };
@@ -60,6 +72,14 @@ const Login = () => {
         "http://localhost:8000/auth/login",
         userRegistration
       );
+
+      if (response.data.message === "Invalid password") {
+        dispatch(loginFail(response.data.message));
+        return;
+      } else if (response.data.message === "User not found!") {
+        dispatch(loginFail(response.data.message));
+        return;
+      }
 
       const { token, user } = response.data;
 
@@ -106,6 +126,7 @@ const Login = () => {
             onSubmit={handleSubmit}
           >
             <div className="loginInfo flex flex-col mb-4">
+              {error && <div className="text-sm text-red-600 bg-red-200 p-1 px-2 rounded-sm mb-2 border border-red-400">{error}</div>}
               <label htmlFor="" className="font-medium">
                 Email
               </label>

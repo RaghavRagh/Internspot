@@ -1,11 +1,9 @@
 import "./CheckoutPage.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
 import SubscriptionInfo from "../../components/SubscriptionInfo/SubscriptionInfo";
 import { useSelector } from "react-redux";
 import { selectUserInfo } from "../../features/userSlice";
 import { useEffect, useState } from "react";
-import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 
@@ -164,11 +162,9 @@ const CheckoutPage = () => {
 
   return (
     <div className="checkoutWrapper h-screen">
-      <Navbar />
       <div className="md:container md:mx-auto flex items-center justify-center">
-        <div className="mx-4 items-center space-y-10 lg:flex lg:flex-row lg:items-center lg:justify-center gap-12 mt-4">
+        <div className="mx-4 flex-col space-y-10 lg:flex lg:flex-row items-center justify-center gap-12 mt-4">
           <div
-            action=""
             className="flex flex-col p-5 border rounded-xl gap-2 bg-white shadow"
           >
             <div className="flex gap-5">
@@ -223,7 +219,7 @@ const CheckoutPage = () => {
                 ₹{finalPrice}
               </div>
               <button
-                className="bg-white p-2 rounded-lg w-2/5 mr-1 border shadow text-center"
+                className="bg-white p-2 rounded-lg w-2/5 mr-1 border shadow text-center hover:shadow-md transition"
                 onClick={() => checkoutHandler(finalPrice)}
               >
                 {loading ? (
@@ -244,7 +240,6 @@ const CheckoutPage = () => {
           />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

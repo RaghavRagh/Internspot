@@ -21,7 +21,7 @@ const SubscriptionInfo = ({
   };
 
   return (
-    <div className="flex flex-col max-w-lg p-3 mx- text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow xl:p-3 sm:min-w-72 hover:shadow-lg transition ease-out">
+    <div className="flex flex-col max-w-lg p-3 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow xl:p-3 sm:min-w-72 hover:shadow-lg transition ease-out">
       <h3
         className={`mb-4 text-2xl font-semibold border p-6 text-white rounded-lg px-5 text-center  ${gradientColors}`}
       >
@@ -133,7 +133,6 @@ const SubscriptionInfo = ({
 
       <button
         className="focus:ring-2 focus:ring-blue-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center border border-slate-300 hover:bg-sky-100/40 transition ease-linear shadow"
-        // onClick={() => checkoutHandler(finalPrice)}
         onClick={handleGetStartedClick}
       >
         Get started

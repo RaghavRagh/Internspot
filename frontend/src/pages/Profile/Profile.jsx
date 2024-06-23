@@ -60,11 +60,11 @@ const Profile = () => {
     // for (var pair of formData.entries()) {
     //   console.log(pair[0] + ", " + pair[1]);
     // }
-    
+
     // dispatch(updateProfile(formData));
 
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const response = await axios.put(
         "http://localhost:8000/user/profile",
@@ -85,7 +85,6 @@ const Profile = () => {
 
   return (
     <>
-      <Navbar />
       <div className="profileContainer flex justify-center items-center h-screen">
         <div className="profileWrapper m-8 p-8 flex flex-col border-2 rounded-xl w-[29rem] items-center shadow-lg">
           <h1 className="profile mb-10 font-semibold text-5xl">Profile</h1>
@@ -93,7 +92,7 @@ const Profile = () => {
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
               <div className="profileForm flex flex-col items-center">
                 <div className="relative">
-                  <div className="profilePhoto w-36 h-36 border rounded-full overflow-hidden object-cover outline-none  ring-offset-2 shadow hover:shadow-lg transition-shadow ease-linear relative">
+                  <div className="profilePhoto w-36 h-36 border rounded-full object-cover overflow-hidden shadow hover:shadow-lg transition-shadow ease-linear">
                     <img src={userInfo?.avatar} alt="profile photo" />
                   </div>
                   <span className="absolute bottom-3 right-2">
@@ -103,7 +102,7 @@ const Profile = () => {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="size-6 text-slate-800 hover:text-slate-600"
+                      className="size-6"
                     >
                       <path
                         strokeLinecap="round"
@@ -122,7 +121,7 @@ const Profile = () => {
                   className="border rounded-md mt-1 p-2 outline-none hover:ring-2 focus:ring-2 focus:ring-indigo-300"
                   name="name"
                   type="text"
-                  value={profileData.name}
+                  value={profileData?.name}
                   onChange={handleInputChange}
                 />
               </div>
@@ -134,7 +133,7 @@ const Profile = () => {
                   className="border rounded-md mt-1 p-2 outline-none hover:ring-2 focus:ring-2 focus:ring-indigo-300"
                   type="text"
                   name="phone"
-                  value={profileData.phone}
+                  value={profileData?.phone}
                   onChange={handleInputChange}
                 />
               </div>
@@ -145,7 +144,7 @@ const Profile = () => {
                 <select
                   className="border rounded-md mt-1 p-2 outline-none hover:ring-2 focus:ring-2 focus:ring-indigo-300"
                   name="language"
-                  value={profileData.language}
+                  value={profileData?.language}
                   onChange={handleInputChange}
                 >
                   <option value={"en"}>English</option>

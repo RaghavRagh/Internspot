@@ -3,6 +3,7 @@ import Internships from "../components/Internships/Internships"
 import Subscription from "./Subscription/Subscription"
 
 const Website = () => {
+  
   return (
     <div>
       <Hero />

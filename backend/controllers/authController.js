@@ -41,13 +41,11 @@ export const registerUser = async (req, res) => {
       phone: newUser.phone,
     };
 
-    res
-      .status(201)
-      .json({
-        message: "User registered successfully",
-        user: userResponse,
-        token,
-      });
+    res.status(201).json({
+      message: "User registered successfully",
+      user: userResponse,
+      token,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -78,7 +76,7 @@ export const loginUser = async (req, res) => {
       name: user.name,
       email: user.email,
       phone: user.phone,
-      avatar: user.avatar
+      avatar: user.avatar,
     };
 
     res.json({ token, user: userResponse });

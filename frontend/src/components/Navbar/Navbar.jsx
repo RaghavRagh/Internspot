@@ -26,7 +26,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center justify-center gap-8 font-medium">
             <NavLink>Internships</NavLink>
             <NavLink>Jobs</NavLink>
-            <NavLink>Courses</NavLink>
+            <NavLink to={"/subscription"}>Subscription</NavLink>
           </div>
         </div>
         {/* right */}

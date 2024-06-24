@@ -28,6 +28,7 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
           <Routes>
+            
             <Route element={<Layout />}>
               <Route path="/" element={<Website />} />
               <Route path="/auth">

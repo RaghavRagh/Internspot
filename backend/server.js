@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import deviceInfoRoute from "./routes/deviceInfoRoute.js";
 dotenv.config();
 
 const app = express();
@@ -25,6 +26,7 @@ db.once("open", () => {
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use(paymentRoutes);
+app.use(deviceInfoRoute);
 
 app.get("/getKey", (req, res) => {
   res.status(200).json({ key: process.env.RAZORPAY_API_KEY });

@@ -15,6 +15,7 @@ import {
   selectUserInfo,
   selectUserLoading,
 } from "../../features/userSlice";
+import { sendDeviceInfo } from "../../../utils/deviceInfo";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Login = () => {
   const registerFunction = () => {
     dispatch(loginRequest());
     signInWithPopup(auth, provider)
-      .then((res) => {
+      .then(async (res) => {
         const user = {
           name: res.user.displayName,
           email: res.user.email,
@@ -48,6 +49,7 @@ const Login = () => {
         localStorage.setItem("token", res.user.accessToken);
         localStorage.setItem("userInfo", JSON.stringify(user));
         dispatch(loginSuccess(user));
+        await sendDeviceInfo();
         navigate("/");
       })
       .catch((err) => {
@@ -87,6 +89,7 @@ const Login = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("userInfo", JSON.stringify(user));
         dispatch(loginSuccess(user));
+        await sendDeviceInfo();
         navigate("/");
       }
     } catch (error) {
@@ -126,7 +129,11 @@ const Login = () => {
             onSubmit={handleSubmit}
           >
             <div className="loginInfo flex flex-col mb-4">
-              {error && <div className="text-sm text-red-600 bg-red-200 p-1 px-2 rounded-sm mb-2 border border-red-400">{error}</div>}
+              {error && (
+                <div className="text-sm text-red-600 bg-red-200 p-1 px-2 rounded-sm mb-2 border border-red-400">
+                  {error}
+                </div>
+              )}
               <label htmlFor="" className="font-medium">
                 Email
               </label>

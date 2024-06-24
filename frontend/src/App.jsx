@@ -10,6 +10,7 @@ import { loginSuccess } from "./features/userSlice";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import Website from "./pages/Website";
 import Layout from "./components/Layout/Layout";
+import Internships from "./pages/Internships";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,21 +28,21 @@ function App() {
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            
-            <Route element={<Layout />}>
-              <Route path="/" element={<Website />} />
-              <Route path="/auth">
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
-              </Route>
-              <Route path="/user">
-                <Route path="profile" element={<Profile />} />
-              </Route>
-              <Route path="subscription" element={<Subscription />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Website />} />
+            <Route path="/auth">
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
             </Route>
-          </Routes>
+            <Route path="/user">
+              <Route path="profile" element={<Profile />} />
+            </Route>
+            <Route path="subscription" element={<Subscription />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/internships" element={<Internships />} />
+          </Route>
+        </Routes>
       </Suspense>
     </BrowserRouter>
   );

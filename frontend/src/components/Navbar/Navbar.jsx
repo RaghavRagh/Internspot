@@ -24,7 +24,7 @@ const Navbar = () => {
             <NavLink to={"/"}>INTERNSPOT</NavLink>
           </span>
           <div className="hidden md:flex items-center justify-center gap-8 font-medium">
-            <NavLink>Internships</NavLink>
+            <NavLink to={"/internships"}>Internships</NavLink>
             <NavLink>Jobs</NavLink>
             <NavLink to={"/subscription"}>Subscription</NavLink>
           </div>

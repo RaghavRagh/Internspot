@@ -9,8 +9,8 @@ import { ClipLoader } from "react-spinners";
 
 const CheckoutPage = () => {
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    const userInfo = localStorage.getItem("userInfo");
+    if (!userInfo) {
       navigate("/auth/login");
     }
   });
@@ -116,7 +116,7 @@ const CheckoutPage = () => {
             if (verificationResponse.data.status === "success") {
               setLoading(false);
               alert("Payment successful and verified!");
-              navigate("/");
+              navigate("/internships");
               console.log(verificationResponse.data);
             } else {
               setLoading(false);

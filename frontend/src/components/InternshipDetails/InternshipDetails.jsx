@@ -1,23 +1,19 @@
+import "./InternshipDetails.css";
+
 const InternshipDetails = ({ isOpen, onClose, data }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-lg relative w-[55rem] min-w-96 m-2">
-        <div className="bg-slate-200 rounded-t-xl">
-          <div className="flex flex-col justify-between items-start px-7 py-6 pt-7 gap-2">
-            <h2 className="text-xl font-semibold">
-              Applying for {data.jobName}
-            </h2>
-            <p className="text-sm text-slate-600">{data.companyName}</p>
-          </div>
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <button onClick={onClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-6 absolute right-10 top-10 cursor-pointer"
+            className="size-6 absolute right-6 top-8 cursor-pointer"
             onClick={onClose}
           >
             <path
@@ -26,6 +22,14 @@ const InternshipDetails = ({ isOpen, onClose, data }) => {
               d="M6 18 18 6M6 6l12 12"
             />
           </svg>
+        </button>
+        <div className="bg-slate-100 rounded-t-xl">
+          <div className="flex flex-col justify-between items-start px-7 py-6 pt-7 gap-2">
+            <h2 className="text-xl font-semibold">
+              Applying for {data.jobName}
+            </h2>
+            <p className="text-slate-600">{data.companyName}</p>
+          </div>
         </div>
         <div className="border-b border border-slate300"></div>
         <div className="px-7 pb-7">
@@ -47,9 +51,11 @@ const InternshipDetails = ({ isOpen, onClose, data }) => {
           </div>
           <div className="responsibilities mt-4 flex flex-col gap-2">
             <h4 className="font-medium text-lg">Key responsibilities</h4>
-            <p className="text-[15.5px]">Selected intern day-to-day responsibilities include:</p>
+            <p className="text-[15.5px]">
+              Selected intern day-to-day responsibilities include:
+            </p>
 
-            <div className="res mt-5 text-[15.5px]">
+            <div className="res mt-5 text-[15.6px]">
               <p>
                 1. Assist in the design and implementation of website layouts,
                 user interfaces, and other visual elements using HTML, CSS, and
@@ -99,7 +105,7 @@ const InternshipDetails = ({ isOpen, onClose, data }) => {
             </div>
             <div className="border-b my-5"></div>
             <div className="text-end">
-              <button className="bg-sky-400 py-2 px-5 font-bold text-white rounded-lg">
+              <button className="bg-sky-400 py-2 px-6 font-bold text-white rounded-md">
                 Apply
               </button>
             </div>

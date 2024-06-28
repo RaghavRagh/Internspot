@@ -11,6 +11,7 @@ import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import Website from "./pages/Website";
 import Layout from "./components/Layout/Layout";
 import Internships from "./pages/Internships";
+import MyApplications from "./pages/MyApplications/MyApplications";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
             </Route>
             <Route path="/user">
               <Route path="profile" element={<Profile />} />
+              <Route path="applications" element={<MyApplications />} />
             </Route>
             <Route path="subscription" element={<Subscription />} />
             <Route path="/checkout" element={<CheckoutPage />} />

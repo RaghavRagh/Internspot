@@ -7,16 +7,9 @@ const SlantCards = ({
   status,
   onClick,
 }) => {
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   if (onClick) {
-  //     onClick();
-  //   }
-  // }
-
   return (
     <div
-      className="slantcardContainer p-5 mt-5 border rounded-lg shadow sm:w-[40rem] hover:-translate-y-1 transition ease-in hover:shadow-md w-96 cursor-pointer"
+      className="slantcardContainer p-5 mb-5 border rounded-lg shadow sm:w-[40rem] transition ease-in hover:shadow-lg w-96 cursor-pointer bg-white"
       onClick={onClick}
     >
       <div className="flex flex-col items-start gap-2">

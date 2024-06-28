@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SlantCards from "../components/Card/SlantCards";
-import InternshipDetails from "../components/InternshipDetails";
+import InternshipDetails from "../components/InternshipDetails/InternshipDetails";
 
 const jobName = [
   "Java Development",
@@ -75,16 +75,18 @@ const Internships = () => {
   const handleCardClick = (cardData) => {
     setSelectedCardData(cardData);
     setIsPopupOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
     setSelectedCardData(null);
+    document.body.style.overflow = "auto";
   };
 
   return (
-    <div className="internshipWrapper">
-      <div className="bg-gradient-to-r from-cyan-200 to-blue-200 mb-5 text-center text-4xl font-extrabold p-10 text-white">
+    <div className="internshipWrapper bg-gray-100/40">
+      <div className="bg-gradient-to-r from-cyan-200 to-blue-200 mb-5 text-center text-4xl font-extrabold py-10 sm:p-10 p-4 text-white tracking-tight">
         Find your internships
       </div>
       <div className="internshipContainer md:container md:mx-auto flex flex-col items-center justify-center">

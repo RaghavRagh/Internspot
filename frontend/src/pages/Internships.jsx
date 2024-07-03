@@ -19,7 +19,8 @@ const Internships = () => {
     const fetchInternships = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/getInternships"
+          // "http://localhost:8000/getInternships"
+          "https://internspot-backend.vercel.app/getInternships"
         );
         const data = response.data;
         setLoading(false);

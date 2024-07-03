@@ -3,7 +3,7 @@ import crypto from "crypto";
 import dotenv from "dotenv";
 dotenv.config();
 
-import {sendMail} from "../mailer.js";
+import { sendMail } from "../mailer.js";
 
 // create order
 export const checkout = async (req, res) => {
@@ -43,29 +43,7 @@ export const paymentVerification = async (req, res) => {
   shasum.update(`${razorpay_order_id}|${razorpay_payment_id}`);
   const digest = shasum.digest("hex");
 
-  // console.log("digest = ", digest)
-  // console.log("razorpay_signature = ", razorpay_signature);
-
   if (digest === razorpay_signature) {
-    // const userEmail = req.body.email;
-
-    // const invoice = `
-    //   <h1>Invoice</h1>
-    //   <p>Plan: ${planName}</p>
-    //   <p>Price: ₹${price}</p>
-    //   <p>Payment ID: ${razorpay_payment_id}</p>
-    //   <p>Order ID: ${razorpay_order_id}</p>
-    // `;
-
-    // sendMail(
-    //   userEmail,
-    //   "Your Payment Invoice",
-    //   `Your plan ${planName} has been purchased successfully.`,
-    //   invoice
-    // );
-
-    // res.json({ message: "Payment verified and email sent" });
-
     res.json({
       status: "success",
       orderId: razorpay_order_id,

@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
       enum: ["free", "bronze", "silver", "gold"],
     },
     applications: { type: Number, default: 0 },
-    expiresAt: { type: Date, required: true },
+    expiresAt: { type: Date },
   },
   createdAt: { type: Date, default: Date.now },
 });

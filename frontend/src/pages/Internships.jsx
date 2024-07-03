@@ -1,76 +1,43 @@
 import { useEffect, useState } from "react";
 import SlantCards from "../components/Card/SlantCards";
 import InternshipDetails from "../components/InternshipDetails/InternshipDetails";
+import axios from "axios";
+import { PuffLoader } from "react-spinners";
 
-const jobName = [
-  "Java Development",
-  "Web Development",
-  "Data Science",
-  "Graphic Design",
-  "Flutter Development",
-  "Reactjs Development",
-  "Backend Developement",
-  "AI/ML Engineer",
-  "Artificial Intelligence (AI)",
-  "Machine Learning",
-  "Prompt Testing (AI/ML)",
-];
-const companyNames = [
-  "Monkhub",
-  "TechCorp",
-  "Innovate",
-  "Designify",
-  "Nullclass",
-  "Conversely",
-  "Ridobiko",
-  "TwinITO",
-];
-const locations = [
-  "Delhi",
-  "Mumbai",
-  "Bangalore",
-  "Chennai",
-  "Gurgoan",
-  "Noida",
-  "Work from home",
-];
-const stipends = [
-  "5,000",
-  "10,000",
-  "15,000",
-  "20,000",
-  "1,000",
-  "6,000",
-  "25,0000",
-];
-const durations = ["3", "6", "9", "12", "1", "2"];
 const statuses = ["Few hours ago", "Just now"];
 
 const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-const generateRandomCardData = () => ({
-  jobName: getRandomElement(jobName),
-  companyName: getRandomElement(companyNames),
-  location: getRandomElement(locations),
-  stipend: getRandomElement(stipends),
-  duration: getRandomElement(durations),
-  status: getRandomElement(statuses),
-});
-
 const Internships = () => {
   const [cardDataArray, setCardDataArray] = useState([]);
-
-  useEffect(() => {
-    const noOfCards = 20;
-    const generatedCardData = Array.from(
-      { length: noOfCards },
-      generateRandomCardData
-    );
-    setCardDataArray(generatedCardData);
-  }, []);
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedCardData, setSelectedCardData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchInternships = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8000/getInternships"
+        );
+        const data = response.data;
+        setLoading(false);
+
+        const dataWithStatus = data.map((internship) => ({
+          ...internship,
+          status: getRandomElement(statuses),
+        }));
+
+        setCardDataArray(dataWithStatus);
+      } catch (error) {
+        setLoading(false);
+        console.error("Error fetching internships:", error);
+      }
+    };
+
+    fetchInternships();
+  }, []);
 
   const handleCardClick = (cardData) => {
     setSelectedCardData(cardData);
@@ -90,13 +57,19 @@ const Internships = () => {
         Find your internships
       </div>
       <div className="internshipContainer md:container md:mx-auto flex flex-col items-center justify-center">
-        {cardDataArray.map((cardData, index) => (
-          <SlantCards
-            key={index}
-            {...cardData}
-            onClick={() => handleCardClick(cardData)}
-          />
-        ))}
+        {loading ? (
+          <PuffLoader size={50} />
+        ) : (
+          <>
+            {cardDataArray.map((cardData, index) => (
+              <SlantCards
+                key={index}
+                {...cardData}
+                onClick={() => handleCardClick(cardData)}
+              />
+            ))}
+          </>
+        )}
       </div>
       <InternshipDetails
         isOpen={isPopupOpen}

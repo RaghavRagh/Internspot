@@ -26,9 +26,9 @@ const InternshipDetails = ({ isOpen, onClose, data }) => {
         <div className="bg-slate-100 rounded-t-xl">
           <div className="flex flex-col justify-between items-start px-7 py-6 pt-7 gap-2">
             <h2 className="text-xl font-semibold">
-              Applying for {data.jobName}
+              Applying for {data.title}
             </h2>
-            <p className="text-slate-600">{data.companyName}</p>
+            <p className="text-slate-600">{data.company}</p>
           </div>
         </div>
         <div className="border-b border border-slate300"></div>
@@ -42,8 +42,7 @@ const InternshipDetails = ({ isOpen, onClose, data }) => {
               /month
             </p>
             <p>
-              <span className="font-medium">Duration:</span> {data.duration}{" "}
-              months
+              <span className="font-medium">Duration:</span> {data.duration}
             </p>
             <p>
               <span className="font-medium">Status:</span> {data.status}

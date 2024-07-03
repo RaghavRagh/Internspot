@@ -15,6 +15,7 @@ const Register = () => {
     email: "",
     password: "",
     phone: "",
+    avatar: "" | "https://i.pinimg.com/736x/eb/8a/dd/eb8addac91cec1bba36b57ad28729f17.jpg"
   });
 
   const registerFunction = () => {

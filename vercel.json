@@ -1,0 +1,33 @@
+{
+    "version": 2,
+    "name": "mern-internship-app",
+    "builds": [
+      {
+        "src": "frontend/package.json",
+        "use": "@vercel/next"
+      },
+      {
+        "src": "backend/server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/backend/server.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/frontend/$1"
+      }
+    ],
+    "env": {
+      "MONGODB_URI": "mongodb://localhost:27017/internshala",
+      "JWT_SECRET": "your-jwt-secret",
+      "RAZORPAY_KEY": "your-razorpay-key",
+      "RAZORPAY_SECRET": "your-razorpay-secret",
+      "GOOGLE_CLIENT_ID": "your-google-client-id",
+      "GOOGLE_CLIENT_SECRET": "your-google-client-secret"
+    }
+  }
+  

@@ -8,6 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo);
+  console.log(userInfo);
 
   const handleLogout = () => {
     dispatch(logout());

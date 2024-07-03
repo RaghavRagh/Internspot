@@ -1,6 +1,6 @@
 const SlantCards = ({
-  jobName,
-  companyName,
+  title,
+  company,
   location,
   stipend,
   duration,
@@ -13,10 +13,10 @@ const SlantCards = ({
       onClick={onClick}
     >
       <div className="flex flex-col items-start gap-2">
-        <div className="topicName font-semibold">{jobName}</div>
+        <div className="topicName font-semibold">{title}</div>
         <div className="flex items-center justify-center gap-3">
           <span className="conpanyName font-medium text-slate-500 text-sm">
-            {companyName}
+            {company}
           </span>
           <span className="text-xs border border-blue-400 text-blue-400 p-0.5 px-2 rounded-3xl">
             Actively Hiring
@@ -83,7 +83,7 @@ const SlantCards = ({
                 />
               </svg>
             </span>
-            <span>{duration} months</span>
+            <span>{duration}</span>
           </div>
         </div>
         {status == "Few hours ago" ? (

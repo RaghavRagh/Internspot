@@ -59,7 +59,9 @@ const Internships = () => {
       </div>
       <div className="internshipContainer md:container md:mx-auto flex flex-col items-center justify-center">
         {loading ? (
-          <PuffLoader size={50} />
+          <div className="h-screen text-center space-y-10">
+            <PuffLoader size={50} />
+          </div>
         ) : (
           <>
             {cardDataArray.map((cardData, index) => (

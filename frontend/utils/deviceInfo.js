@@ -1,4 +1,3 @@
-// src/utils/deviceInfo.js
 import axios from "axios";
 import UAParser from "ua-parser-js";
 
@@ -29,7 +28,7 @@ export const sendDeviceInfo = async () => {
     console.log("fullDeviceInfo = ", fullDeviceInfo)
 
     await axios.post(
-      "http://localhost:8000/device-info",
+      "https://internspot-backend.vercel.app/device-info",
       fullDeviceInfo,
       {
         headers: {

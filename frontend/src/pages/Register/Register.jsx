@@ -40,7 +40,8 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/auth/register",
+        // "http://localhost:8000/auth/register",
+        "https://internspot-backend.vercel.app/auth/register",
         userRegistration
       );
 

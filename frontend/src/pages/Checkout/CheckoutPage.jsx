@@ -68,12 +68,12 @@ const CheckoutPage = () => {
 
     const {
       data: { key },
-    } = await axios.get("http://localhost:8000/getKey");
+    } = await axios.get("https://internspot-backend.vercel.app/getKey");
 
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:8000/payment",
+        "https://internspot-backend.vercel.app/payment",
         { amount },
         {
           headers: {
@@ -103,7 +103,7 @@ const CheckoutPage = () => {
 
           try {
             const verificationResponse = await axios.post(
-              "http://localhost:8000/paymentverification",
+              "https://internspot-backend.vercel.app/paymentverification",
               data,
               {
                 headers: {
@@ -161,7 +161,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="checkoutWrapper h-screen">
+    <div className="checkoutWrapper pb-10">
       <div className="md:container md:mx-auto flex items-center justify-center">
         <div className="mx-4 flex-col space-y-10 lg:flex lg:flex-row items-center justify-center gap-12 mt-4">
           <div

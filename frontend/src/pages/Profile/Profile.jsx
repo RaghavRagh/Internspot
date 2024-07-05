@@ -67,7 +67,7 @@ const Profile = () => {
       const token = localStorage.getItem("token");
 
       const response = await axios.put(
-        "http://localhost:8000/user/profile",
+        "https://internspot-backend.vercel.app/user/profile",
         formData,
         {
           headers: {

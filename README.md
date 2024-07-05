@@ -7,9 +7,7 @@ A comprehensive platform for students to search, apply, and manage internships, 
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
-- [License](#license)
 
 ## Features
 - User authentication with Google OAuth and JWT
@@ -39,7 +37,7 @@ A comprehensive platform for students to search, apply, and manage internships, 
 ### Backend Setup
 1. Clone the repository
     ```bash
-    git clone https://github.com/your-username/internship-listing-website.git
+    git clone https://github.com/RaghavRagh/Internspot
     cd backend
     ```
 
@@ -58,7 +56,7 @@ A comprehensive platform for students to search, apply, and manage internships, 
 
 4. Start the backend server
     ```bash
-    npm start
+    npm run dev
     ```
 
 ### Frontend Setup
@@ -74,7 +72,7 @@ A comprehensive platform for students to search, apply, and manage internships, 
 
 3. Start the frontend server
     ```bash
-    npm start
+    npm run dev
     ```
 
 ## Usage
@@ -82,8 +80,6 @@ A comprehensive platform for students to search, apply, and manage internships, 
 2. Sign up or log in using your Google account or phone.
 3. Browse internships and apply based on your subscription plan.
 4. Manage your applications and view login history from your profile.
-
-## Project Structure
 
 ### Backend
 

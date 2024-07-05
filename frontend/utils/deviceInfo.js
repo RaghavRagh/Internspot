@@ -9,7 +9,7 @@ const deviceInfo = {
   deviceType: uaResult.device.type || "desktop",
 };
 
-console.log(deviceInfo)
+// console.log(deviceInfo)
 
 export const sendDeviceInfo = async () => {
   const userInfo = localStorage.getItem('userInfo');
@@ -25,7 +25,7 @@ export const sendDeviceInfo = async () => {
 
     const fullDeviceInfo = { ...deviceInfo, ip, userId };
 
-    console.log("fullDeviceInfo = ", fullDeviceInfo)
+    // console.log("fullDeviceInfo = ", fullDeviceInfo)
 
     await axios.post(
       "https://internspot-backend.vercel.app/device-info",

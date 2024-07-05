@@ -11,9 +11,9 @@ const Hero = () => {
             </h1>
           </div>
           <div className="heroDescription my-6">
-            <p className="flex flex-col text-slate-400 font-medium md:text-lg tracking-tight">
-              <span>Empowering tomorrow's leaders today through immersive</span>
-              <span>internships - join us and pave your path to success!</span>
+            <p className="flex flex-col text-slate-400 font-medium md:text-lg tracking-tight max-w-[30rem]">
+              <span>Empowering tomorrow's leaders today through immersive internships - join us and pave your path to success!</span>
+              {/* <span>Join us and pave your path to success!</span> */}
             </p>
           </div>
         </div>

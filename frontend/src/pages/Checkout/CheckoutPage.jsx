@@ -45,9 +45,11 @@ const CheckoutPage = () => {
 
   // checkout handler
   const checkoutHandler = async (amount) => {
+    setLoading(true);
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/auth/login");
+      setLoading(false);
       return;
     }
 
@@ -164,16 +166,14 @@ const CheckoutPage = () => {
     <div className="checkoutWrapper pb-10">
       <div className="md:container md:mx-auto flex items-center justify-center">
         <div className="mx-4 flex-col space-y-10 lg:flex lg:flex-row items-center justify-center gap-12 mt-4">
-          <div
-            className="flex flex-col p-5 border rounded-xl gap-2 bg-white shadow"
-          >
+          <div className="flex flex-col p-5 border rounded-xl gap-2 bg-white shadow">
             <div className="flex gap-5">
               <div className="formGroup flex flex-col gap-2">
                 <label className="font-medium">Name</label>
                 <input
                   type="text"
                   value={userInfo?.name}
-                  className="border p-2 rounded-md text-slate-500"
+                  className="border p-2 rounded-md text-slate-500 max-w-40"
                   disabled
                 />
               </div>
@@ -183,7 +183,7 @@ const CheckoutPage = () => {
                 <input
                   type="email"
                   value={userInfo?.email}
-                  className="border p-2 rounded-md text-slate-500"
+                  className="border p-2 rounded-md text-slate-500 max-w-40"
                   disabled
                 />
               </div>

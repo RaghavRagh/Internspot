@@ -100,8 +100,8 @@ const Login = () => {
   };
 
   return (
-    <div className="loginWrapper h-screen flex justify-center items-center">
-      <div className="loginContainer m-8 p-8 flex flex-col border-2 rounded-xl w-[29rem] justify-center items-center shadow-lg transition-shadow ease-in bg-white relative">
+    <div className="loginWrapper flex justify-center items-center">
+      <div className="loginContainer mx-3 my-10 p-8 flex flex-col border-2 rounded-xl w-[29rem] justify-center items-center shadow-lg transition-shadow ease-in bg-white relative">
         <h1 className="mb-10 font-semibold text-5xl">Login</h1>
         <button
           className="googleSignin w-full flex justify-center items-center gap-6 border rounded-lg p-2 font-medium border-b-4 hover:shadow-md transition ease-in"

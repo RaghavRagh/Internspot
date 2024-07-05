@@ -65,8 +65,8 @@ const Register = () => {
   };
 
   return (
-    <div className="registerWrapper h-screen flex justify-center items-center">
-      <div className="registerContainer m-8 p-8 flex flex-col border-2 rounded-xl w-[29rem] justify-center items-center shadow-lg transition-shadow ease-in bg-white relative">
+    <div className="registerWrapper flex justify-center items-center">
+      <div className="registerContainer mx-3 my-10 p-8 flex flex-col border-2 rounded-xl w-[29rem] justify-center items-center shadow-lg transition-shadow ease-in bg-white relative">
         <h1 className="mb-10 font-semibold text-5xl">Register</h1>
         <button
           className="googleSignin w-full flex justify-center items-center gap-6 border rounded-lg p-2 font-medium border-b-4 hover:shadow-md transition ease-in"

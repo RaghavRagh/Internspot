@@ -86,7 +86,7 @@ const Profile = () => {
   return (
     <>
       <div className="profileContainer flex justify-center items-center h-screen">
-        <div className="profileWrapper m-8 p-8 flex flex-col border-2 rounded-xl w-[29rem] items-center shadow-lg">
+        <div className="profileWrapper mx-3 my-10 p-8 flex flex-col border-2 rounded-xl w-[29rem] items-center shadow-lg">
           <h1 className="profile mb-10 font-semibold text-5xl">Profile</h1>
           <div className="profileInfo mt-8 w-full">
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>

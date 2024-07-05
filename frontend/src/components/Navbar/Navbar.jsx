@@ -3,23 +3,37 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectUserInfo } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import OutsideClickHandler from "react-outside-click-handler";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo);
-  console.log(userInfo);
+  // console.log(userInfo);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
   const handleLogout = () => {
     dispatch(logout());
     localStorage.removeItem("token");
     localStorage.removeItem("userInfo");
-    navigate('/');
+    navigate("/");
+    setMenuOpen(false);
   };
 
   return (
     <nav className="headerContainer border-b-2 shadow-sm sticky top-0 z-50 bg-white">
       <div className="headerWrapper px-4 py-3 md:container md:mx-auto flex items-center gap-20 lg:justify-between">
+        {/* left */}
         <div className="left flex items-center justify-center gap-8 font-medium">
           <span className="text-sky-500 text-lg">
             <NavLink to={"/"}>INTERNSPOT</NavLink>
@@ -32,7 +46,14 @@ const Navbar = () => {
         </div>
         {/* right */}
         <div className="right flex items-center justify-end">
-          <div className="hidden lg:flex items-center justify-center gap-8 ">
+          {/* {userInfo && (
+              <NavLink to={"/user/profile"}>
+                <div className="avatarContainer w-12 h-12 border rounded-full overflow-hidden object-contain outline outline-3 outline-offset-2 outline-slate-300 mr-5 text-end">
+                  <img src={userInfo?.avatar} alt="avatar" />
+                </div>
+              </NavLink>
+            )} */}
+          <div className="hidden lg:flex items-center gap-8">
             <div className="searchContainer flex gap-4">
               <span>
                 <svg
@@ -64,6 +85,7 @@ const Navbar = () => {
                     <div className="avatarContainer w-12 h-12 border rounded-full overflow-hidden object-contain outline outline-3 outline-offset-2 outline-slate-300">
                       <img src={userInfo?.avatar} alt="avatar" />
                     </div>
+                    {/* <div className="lg:hidden">Profile</div> */}
                   </NavLink>
                 )}
                 <button
@@ -90,7 +112,10 @@ const Navbar = () => {
             )}
           </div>
 
-          <span className="absolute right-0 mr-5 lg:hidden hover:cursor-pointer p-1 rounded-xl">
+          <span
+            className="absolute right-0 mr-5 lg:hidden hover:cursor-pointer p-1 rounded-xl"
+            onClick={toggleMenu}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -108,6 +133,54 @@ const Navbar = () => {
           </span>
         </div>
       </div>
+
+      {menuOpen && (
+        <OutsideClickHandler onOutsideClick={closeMenu}>
+          <div className="mobile flex flex-col items-start text-center bg-white shadow-md absolute right-5 top-4 rounded-xl w-40 border overflow-hidden">
+            <NavLink
+              to={"/internships"}
+              className="border-b px-4 py-3 w-full hover:bg-gray-50"
+              onClick={toggleMenu}
+            >
+              Internships
+            </NavLink>
+            <NavLink
+              to={"/subscription"}
+              className="border-b px-4 py-3 w-full hover:bg-gray-50"
+              onClick={toggleMenu}
+            >
+              Subscription
+            </NavLink>
+            {userInfo ? (
+              <>
+                <NavLink
+                  to={"/user/profile"}
+                  className="border-b px-4 py-3 w-full hover:bg-gray-50"
+                  onClick={toggleMenu}
+                >
+                  Profile
+                </NavLink>
+                <button
+                  className="border-b px-4 py-3 w-full text-sky-400 hover:bg-gray-50"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to={"/auth/login"}
+                  className="border-b px-4 py-3 w-full text-sky-400 hover:bg-gray-50"
+                  onClick={toggleMenu}
+                >
+                  Login
+                </NavLink>
+              </>
+            )}
+          </div>
+        </OutsideClickHandler>
+      )}
     </nav>
   );
 };

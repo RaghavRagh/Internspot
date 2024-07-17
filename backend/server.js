@@ -41,7 +41,7 @@ app.get("/getInternships", async (req, res) => {
     res.status(200).send(internships);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal server error");
+    res.status(500).send({message: "Internal server error"});
   }
 });
 

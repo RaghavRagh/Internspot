@@ -102,3 +102,6 @@ A comprehensive platform for students to search, apply, and manage internships, 
 - `GET /getKey` - Get Razorpay API key
 - `POST /payment` - Initiate payment
 - `POST /paymentverification` - Verify payment
+
+## Design Diagram Razorpay Payment
+![image](https://github.com/user-attachments/assets/afb13bfb-a58c-4da2-81b1-dee1ecf3c940)

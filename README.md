@@ -99,7 +99,6 @@ A comprehensive platform for students to search, apply, and manage internships, 
 - `POST /apply/:internshipId` - Apply to an internship
 
 ### Payments
-- `GET /getKey` - Get Razorpay API key
 - `POST /payment` - Initiate payment
 - `POST /paymentverification` - Verify payment
 
